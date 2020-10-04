@@ -3,6 +3,7 @@ package com.ecommerce.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author halle
  */
 @Configuration
-@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -20,5 +20,10 @@ public class WebConfig implements WebMvcConfigurer {
             .allowedMethods("POST", "OPTIONS", "GET", "PUT", "DELETE")
             .allowedHeaders("*")
             .allowCredentials(true).maxAge(3600);
+    }
+    
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/**").setViewName("/");
     }
 }

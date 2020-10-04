@@ -29,8 +29,8 @@ public class Produto implements Serializable {
     @Column(name = "preco_unitario")
     private BigDecimal precoUnitario;
     
-    @Column(name = "url_imagem")
-    private String urlImagem;
+    @Column(name = "imagem_url")
+    private String imagemUrl;
 
     
 }

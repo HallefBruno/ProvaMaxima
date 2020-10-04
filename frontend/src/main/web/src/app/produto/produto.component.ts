@@ -1,34 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PessoaService } from './pessoa.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { ProdutoService } from './produto.service';
 
 @Component({
-    selector: 'app-pessoa',
-    templateUrl: './pessoa.component.html',
-    styleUrls: ['./pessoa.component.css']
+  selector: 'app-produto',
+  templateUrl: './produto.component.html',
+  styleUrls: ['./produto.component.css']
 })
-export class PessoaComponent implements OnInit {
+export class ProdutoComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;
     salvando = true;
     
-    constructor(private fb: FormBuilder, private pessoaService: PessoaService, private router: Router) { }
+    constructor(private fb: FormBuilder, private router: Router, private produtoService:ProdutoService) { }
 
     ngOnInit() {
         this.form = this.fb.group({
-            nome: ['', Validators.required]
+			nome: ['', Validators.required],
+			preco: ['', Validators.required]
         });
-    }
+	}
+	
+	onSubmit() {
 
-    onSubmit() {
+		console.log(this.form.get('preco').value);
+
         this.submitted = true;
         this.salvando = false;
         if (this.form.valid) {
-            let cliente = { 'nome': this.form.get('nome').value };
-            this.pessoaService.salvar(cliente).subscribe(data => {
+            let produto = { 
+				'nome': this.form.get('nome').value,
+				'precoUnitario': this.form.get('preco').value,
+				'imagemUrl':null
+			};
+            this.produtoService.salvar(produto).subscribe(data => {
                 console.log(data)
                 this.submitted = false;
                 this.salvando = true;
@@ -64,4 +72,5 @@ export class PessoaComponent implements OnInit {
             title: `${message}`
         });
     }
+
 }

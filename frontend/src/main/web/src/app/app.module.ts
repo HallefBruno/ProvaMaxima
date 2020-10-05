@@ -9,6 +9,9 @@ import { ProdutoComponent } from './produto/produto.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { NovoPedidoComponent } from './novo-pedido/novo-pedido.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 export const customCurrencyMaskConfig = {
 	align: "left",
@@ -40,6 +43,9 @@ export const customCurrencyMaskConfig = {
 		FormsModule,
 		ReactiveFormsModule,
 		AutocompleteLibModule,
+		AutoCompleteModule,
+		BrowserAnimationsModule,
+		AngularFontAwesomeModule,
 		NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
 	],
 	providers: [],

@@ -15,9 +15,12 @@ export class NovoPedidoService {
         return this.http.post(`${this.baseUrl}/salvar`, produto);
 	}
 	
-	getClientes(nome: any): Observable<any> {
-        let params = new HttpParams().set('nome', nome)
-        return this.http.get(`${this.baseUrl}/clientes/nome`, {params: params});
+	getClientes(nome: string): Observable<any> {
+        //let params = new HttpParams().set('nome', nome)
+        return this.http.get(`${this.baseUrl}/clientes/${nome}`);
     }
 
+    getProdutos(nome: string): Observable<any> {
+        return this.http.get(`${this.baseUrl}/produtos/${nome}`);
+    }
 }

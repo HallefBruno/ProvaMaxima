@@ -4,9 +4,9 @@
  */
 
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('50','b9d3b74e-c97c-4029-bff3-aa5d051010f5',178,null);
-insert into produto(codigo,nome,preco_unitario,imagem_url) values('12','iPhone 11 Apple com 128GB, Tela Retina HD de 6,1”, iOS 13, Dupla Câmera Traseira de 12 MP, Resistente à Água e Bateria de Longa Duração - Branco',4699,'https://images-submarino.b2w.io/produtos/01/00/img/1611324/8/1611324805_1SZ.jpg');
-insert into produto(codigo,nome,preco_unitario,imagem_url) values('35','Monitor Widescreen LCD LED 18.5” AOC HD E970SWNL',4699,'https://images-submarino.b2w.io/produtos/01/00/img/1611324/8/1611324805_1SZ.jpg');
-insert into produto(codigo,nome,preco_unitario,imagem_url) values('312800A','Fogão 3 Bocas 1 Dupla Cristalaço Industrial Baixa Pressão',718.08,null);
+insert into produto(codigo,nome,preco_unitario,imagem_url) values('12','iPhone 11 Apple com 128GB, Tela Retina HD de 6,1 Branco',4699,'https://images-submarino.b2w.io/produtos/01/00/img/1611324/8/1611324805_1SZ.jpg');
+insert into produto(codigo,nome,preco_unitario,imagem_url) values('35','Monitor Widescreen LCD LED 18.5 AOC HD E970SWNL',4699,'https://images-submarino.b2w.io/produtos/01/00/img/1611324/8/1611324805_1SZ.jpg');
+insert into produto(codigo,nome,preco_unitario,imagem_url) values('312800A','Fogao 3 Bocas 1 Dupla Cristalaço Industrial Baixa Pressao',718.08,null);
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('478ZB','Fone de Ouvido Apple AirPods 2 com Estojo de Recarga',1099,null);
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('114523KL','Galaxy S20 Ultra Cosmic Gray 128GB',6029.1,'https://images-submarino.b2w.io/produtos/01/00/img/1521500/7/1521500721_1SZ.jpg');
 

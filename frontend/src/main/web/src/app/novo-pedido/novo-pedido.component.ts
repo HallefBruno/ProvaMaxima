@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { NovoPedidoService } from './novo-pedido.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-novo-pedido',
@@ -15,44 +16,40 @@ export class NovoPedidoComponent implements OnInit {
     submitted = false;
     salvando = true;
 	isLoadingResult: boolean;
-	data:any[]=[];
+	results: string[];
+	urlImage:string;
+	listProdutos:any[]=[];
+
 	constructor(private fb: FormBuilder, private router: Router, private novoPedidoService:NovoPedidoService) { }
 	
 	ngOnInit(): void {
 
 		this.form = this.fb.group({
-            nomeCliente: [undefined, Validators.required]
+			nomeCliente: [undefined, Validators.required],
+			nomeProduto: [undefined, Validators.required],
+			quantidade: [undefined, Validators.required]
         });
 
 	}
 
-	onChangeSearch(nome:string) {
-		this.isLoadingResult = true;
-		if(nome && nome.replace(/\s/g, "")) {
-			this.novoPedidoService.getClientes(nome).subscribe(nomes=>{
-				if(nomes) {
-					console.log(nomes);
-				}
-			}, error => {
-				console.log(error);	
-			});
-		}
-		
+	searchCliente(event:any) {
+        this.novoPedidoService.getClientes(event.query).subscribe(data => {
+			this.results = data;
+        });
 	}
 
-	searchCleared() {
-    	console.log('searchCleared');
-    	this.data = [];
-  	}
+	onSelect(event:any) {
+		console.log(event);
+		this.urlImage = "assets/icones/foto-fanta.png";
+		this.listProdutos .push(event);
+	}
+
+	searchProduto(event:any) {
+        this.novoPedidoService.getProdutos(event.query).subscribe(data => {
+			this.results = data;
+			console.log(data);
+        });
+	}
+
 
 }
-
-
-//<ng-autocomplete [data]="data" 
-//        [searchKeyword]="keyword" 
-//       (selected)='selectEvent($event)'
-//        (inputChanged)='onChangeSearch($event)' 
-//        (inputFocused)='onFocused($event)' 
-//        [itemTemplate]="itemTemplate"
-//        [notFoundTemplate]="notFoundTemplate">
-//    </ng-autocomplete>

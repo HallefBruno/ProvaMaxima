@@ -1,27 +1,123 @@
-<form [formGroup]="form">
-    <div class="card">
-        <h5 class="card-header">Novo pedido</h5>
-        <div class="card-body">
-            <div class="ng-autocomplete">
-                <ng-autocomplete [data]="data"
-                    formControlName="nomeCliente" 
-                    [searchKeyword]="keyword"
-                    (inputChanged)='onChangeSearch($event)' 
-                    (inputCleared)="searchCleared()" 
-                    [isLoading]="isLoadingResult"
-                    [minQueryLength]="2" placeHolder="Informe um cliente" 
-                    [itemTemplate]="itemTemplate"
-                    [notFoundTemplate]="notFoundTemplate">
-                </ng-autocomplete>
-        
-                <ng-template #itemTemplate let-item>
-                    <a [innerHTML]="item.name"></a>
-                </ng-template>
-        
-                <ng-template #notFoundTemplate let-notFound>
-                    <div [innerHTML]="notFound"></div>
-                </ng-template>
+<div class="jumbotron">
+    <form [formGroup]="form">
+        <div class="p-grid p-fluid">
+            <div class="card">
+                <h5 class="card-header">Novo pedido</h5>
+                <div class="card-body">
+                    <div class="p-col-12 p-md-12">
+                        <p-autoComplete [minLength]="2" [(ngModel)]="cliente" formControlName="nomeCliente"
+                            [suggestions]="results" field="nome" (completeMethod)="searchCliente($event)">
+                            <ng-template let-value pTemplate="selectedItem">
+                                <span style="font-size:18px">>{{value.nome}}</span>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+        <br>
+        <br>
+
+        <div class="p-grid p-fluid">
+
+            <div class="card">
+                <h5 class="card-header">Carrinho</h5>
+                <div class="card-body">
+                    <div class="p-col-12 p-md-12">
+                        <p-autoComplete [minLength]="2" [(ngModel)]="produto" formControlName="nomeProduto"
+                            [suggestions]="results" field="nome" (onSelect)="onSelect($event)" (completeMethod)="searchProduto($event)">
+                            <ng-template let-value pTemplate="selectedItem">
+                                <span style="font-size:18px">>{{value.nome}}</span>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="table-responsive">
+            <table class="table">
+                <tr *ngFor="let itens of listProdutos">
+                    <td style="background-color: white;" >
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div style="width: 6rem;">
+                                    <img class="card-img-top rounded-circle" [src]="itens.imagemUrl" alt="Card image cap">
+                                </div>
+                            </div>
+                            <div style="margin-top: 50px;" class="col-sm-7">
+                                <p class="card-text">{{itens.nome}}</p>
+                            </div>
+                            <div style="margin-top: 45px;" class="col-sm-2">
+                                <input type="text" formControlName="quantidade" class="form-control" id="quantidade" name="quantidade">
+                            </div>
+                            <div style="margin-top: 45px;" class="col-sm-1">
+                                <a><img src="assets/icones/icone-apagar.png"></a>
+                            </div>
+                        </div>
+                    </td>
+                 </tr>
+                 <hr>
+            </table>
+        </div>
+        <br>
+        <div class="p-grid p-fluid">
+
+            <div class="card">
+                <h5 class="card-header">Total</h5>
+                <div class="card-body">
+                    
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Itens</p>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <p>R$1,40</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Frete</p>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <p>R$1,40</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Total</p>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <p>R$2.80</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-lg-3">
+                            <div class="row">
+                                <div style="margin-bottom: 2%;" class="col-sm-12">
+                                    <button type="button" style="width: 230px;" class="btn btn-success">Finalizar pedido</button>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" style="width: 230px;" class="btn btn-light">Limpar carrinho</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>

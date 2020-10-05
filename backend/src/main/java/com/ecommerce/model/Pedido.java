@@ -36,13 +36,8 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "id_cliente")
     @ManyToOne
     private Cliente cliente;
-    
-//    @JoinColumn(name = "id_item_pedido")
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private ItemPedido itemPedido;
-    
-    
-    @OneToMany(mappedBy="id.pedido")
+
+    @OneToMany(mappedBy="id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
     
     @NotNull(message="Campo obrigatório!")

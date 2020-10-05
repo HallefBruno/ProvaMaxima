@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+    <div class="card">
+        <h5 class="card-header">Novo pedido</h5>
+        <div class="card-body">
+            <div class="ng-autocomplete">
+                <ng-autocomplete [data]="data"
+                    formControlName="nomeCliente" 
+                    [searchKeyword]="keyword"
+                    (inputChanged)='onChangeSearch($event)' 
+                    (inputCleared)="searchCleared()" 
+                    [isLoading]="isLoadingResult"
+                    [minQueryLength]="2" placeHolder="Informe um cliente" 
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+        
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                </ng-template>
+        
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</form>

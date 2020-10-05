@@ -7,6 +7,8 @@ import { PessoaComponent } from './pessoa/pessoa.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProdutoComponent } from './produto/produto.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
+import { NovoPedidoComponent } from './novo-pedido/novo-pedido.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 export const customCurrencyMaskConfig = {
 	align: "left",
@@ -27,7 +29,8 @@ export const customCurrencyMaskConfig = {
 	declarations: [
 		AppComponent,
 		PessoaComponent,
-		ProdutoComponent
+		ProdutoComponent,
+		NovoPedidoComponent
 	],
 	imports: [
 		BrowserModule,
@@ -36,6 +39,7 @@ export const customCurrencyMaskConfig = {
 		HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
+		AutocompleteLibModule,
 		NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
 	],
 	providers: [],

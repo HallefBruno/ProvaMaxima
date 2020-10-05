@@ -25,6 +25,5 @@ public class ProdutoController {
     public ResponseEntity<?> salvar(@Valid @RequestBody Produto produto) {
         Produto produtoSalvo = produtoService.salvar(produto);
         return ResponseEntity.ok(produtoSalvo);
-    }
-    
+    }   
 }

@@ -14,4 +14,5 @@ export class ProdutoService {
     salvar(produto: Object): Observable<Object> {
         return this.http.post(`${this.baseUrl}/salvar`, produto);
     }
+
 }

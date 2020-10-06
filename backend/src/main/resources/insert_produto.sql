@@ -9,7 +9,8 @@ insert into produto(codigo,nome,preco_unitario,imagem_url) values('35','Monitor 
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('312800A','Fogao 3 Bocas 1 Dupla Cristalaço Industrial Baixa Pressao',718.08,null);
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('478ZB','Fone de Ouvido Apple AirPods 2 com Estojo de Recarga',1099,null);
 insert into produto(codigo,nome,preco_unitario,imagem_url) values('114523KL','Galaxy S20 Ultra Cosmic Gray 128GB',6029.1,'https://images-submarino.b2w.io/produtos/01/00/img/1521500/7/1521500721_1SZ.jpg');
-
+insert into produto(codigo,nome,preco_unitario,imagem_url) values('8686','Fardo 6UN Coca-cola 600ml',17.34,'assets/icones/foto-coca-cola.png');
+insert into produto(codigo,nome,preco_unitario,imagem_url) values('8254','Fardo 6UN Fanta 600ml',16.64,'assets/icones/foto-fanta.png');
 
 
 -- [

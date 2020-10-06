@@ -38,7 +38,7 @@ public class Pedido implements Serializable {
     private Cliente cliente;
 
     @OneToMany(mappedBy="id.produto")
-    private Set<ItemPedido> itens = new HashSet<>();
+    private Set<ItemPedido> itens;
     
     @NotNull(message="Campo obrigatório!")
     @Column(name="valor_total")

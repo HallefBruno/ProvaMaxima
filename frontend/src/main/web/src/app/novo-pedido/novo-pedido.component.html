@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <form [formGroup]="form">
         <div class="p-grid p-fluid">
-            <div class="card">
+            <div style="height: 250px;" class="card">
                 <h5 class="card-header">Novo pedido</h5>
                 <div class="card-body">
                     <div class="p-col-12 p-md-12">
@@ -25,11 +25,32 @@
                 <div class="card-body">
                     <div class="p-col-12 p-md-12">
                         <p-autoComplete [minLength]="2" [(ngModel)]="produto" formControlName="nomeProduto"
-                            [suggestions]="results" field="nome" (onSelect)="onSelect($event)" (completeMethod)="searchProduto($event)">
+                            [suggestions]="results" field="nome" (onSelect)="onSelect($event)"
+                            (completeMethod)="searchProduto($event)">
                             <ng-template let-value pTemplate="selectedItem">
                                 <span style="font-size:18px">>{{value.nome}}</span>
                             </ng-template>
                         </p-autoComplete>
+                    </div>
+                </div>
+
+                <div *ngIf="listProdutos.length == 0">
+                    <div class="row">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-6">
+                            <div style="margin-top: 20px; margin-bottom: 20px;">
+                                <a><img width="150px;" height="150px" src="assets/icones/imagem-carrinho-empty-state.png"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-6">
+                                <h3 style="color: #d1d1d1;">Carrinho vazio</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,27 +59,42 @@
         <br>
         <div class="table-responsive">
             <table class="table">
-                <tr *ngFor="let itens of listProdutos">
-                    <td style="background-color: white;" >
+                <tr *ngFor="let itens of listProdutos let i = index">
+                    <td style="background-color: white;">
                         <div class="row">
                             <div class="col-sm-2">
                                 <div style="width: 6rem;">
                                     <img class="card-img-top rounded-circle" [src]="itens.imagemUrl" alt="Card image cap">
                                 </div>
                             </div>
-                            <div style="margin-top: 50px;" class="col-sm-7">
+                            <div style="margin-top: 50px;" class="col-sm-6">
                                 <p class="card-text">{{itens.nome}}</p>
                             </div>
-                            <div style="margin-top: 45px;" class="col-sm-2">
-                                <input type="text" formControlName="quantidade" class="form-control" id="quantidade" name="quantidade">
-                            </div>
-                            <div style="margin-top: 45px;" class="col-sm-1">
-                                <a><img src="assets/icones/icone-apagar.png"></a>
+
+                            <div style="margin-top: 45px;" class="col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <input (keyup)="onKey(itens)" min="1" style="width: 65px;" type="number" formControlName="quantidade" class="form-control" id="quantidade" name="quantidade">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <p>{{itens.precoUnitario | currency : 'R$'}}</p>
+                                                <p style="font-weight: bold;">{{itens.precoUnitario | currency : 'R$'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a title="remover item"><img src="assets/icones/icone-apagar.png"></a>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+                        
                     </td>
-                 </tr>
-                 <hr>
+                </tr>
+                <hr>
             </table>
         </div>
         <br>
@@ -67,14 +103,14 @@
             <div class="card">
                 <h5 class="card-header">Total</h5>
                 <div class="card-body">
-                    
+
                     <div class="row">
                         <div class="col-sm-9">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p>Itens</p>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <p>R$1,40</p>
                                 </div>
@@ -84,7 +120,7 @@
                                 <div class="col-sm-6">
                                     <p>Frete</p>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <p>R$1,40</p>
                                 </div>
@@ -94,21 +130,23 @@
                                 <div class="col-sm-6">
                                     <p>Total</p>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <p>R$2.80</p>
                                 </div>
                             </div>
 
                         </div>
-                        
+
                         <div class="col-lg-3">
                             <div class="row">
                                 <div style="margin-bottom: 2%;" class="col-sm-12">
-                                    <button type="button" style="width: 230px;" class="btn btn-success">Finalizar pedido</button>
+                                    <button type="button" style="width: 230px;" class="btn btn-success">Finalizar
+                                        pedido</button>
                                 </div>
                                 <div class="col-sm-12">
-                                    <button type="button" style="width: 230px;" class="btn btn-light">Limpar carrinho</button>
+                                    <button type="button" style="width: 230px;" class="btn btn-light">Limpar
+                                        carrinho</button>
                                 </div>
                             </div>
                         </div>

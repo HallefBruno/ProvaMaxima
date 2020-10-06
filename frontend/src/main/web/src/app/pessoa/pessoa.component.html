@@ -1,11 +1,18 @@
-<div [hidden]="salvando" style="color: slategray;">Salvando...</div>
-<form [hidden]="submitted" (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="form-group" >
-        <label for="nome">Nome do cliente</label>
-        <input type="text" formControlName="nome" class="form-control" id="nome" name="nome" placeholder="Nomde do cliente">
-    </div>
+<div [hidden]="salvando" style="color: slategray;">Aguarde...</div>
 
-    <div style="color: red; font-size: 10px;" *ngIf="form.controls['nome'].errors?.required">Nome é obrigatório.</div>
-    <br>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Salvar</button>
-</form>
+<div class="card">
+    <h5 class="card-header">Cadastro de cliente</h5>
+    <div class="card-body">
+        <form [hidden]="submitted" (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="form-group" >
+                <label for="nome">Nome do cliente</label>
+                <input type="text" formControlName="nome" class="form-control" id="nome" name="nome" placeholder="Nomde do cliente">
+            </div>
+        
+            <div style="color: red; font-size: 10px;" *ngIf="form.controls['nome'].errors?.required">Nome é obrigatório.</div>
+            <br>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+        

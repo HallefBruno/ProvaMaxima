@@ -1,20 +1,25 @@
-<div [hidden]="salvando" style="color: slategray;">Salvando...</div>
-<form [hidden]="submitted" (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="form-group">
-      <label for="nome">Nome do produto</label>
-      <input type="text" class="form-control" id="nome" placeholder="Nome do produto" formControlName="nome">
-    </div>
+<div [hidden]="salvando" style="color: slategray;">Aguarde...</div>
+<div class="card">
+  <h5 class="card-header">Cadastro de cliente</h5>
+  <div class="card-body">
+  <form [hidden]="submitted" (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="form-group">
+        <label for="nome">Nome do produto</label>
+        <input type="text" class="form-control" id="nome" placeholder="Nome do produto" formControlName="nome">
+      </div>
 
-    <div style="color: red; font-size: 10px;" *ngIf="form.controls['nome'].errors?.required">Nome é obrigatório.</div>
-    <br>
+      <div style="color: red; font-size: 10px;" *ngIf="form.controls['nome'].errors?.required">Nome é obrigatório.</div>
+      <br>
 
-    <div class="form-group">
-      <label for="preco">Preço</label>
-      <input name="preco" id="preco" type="text" currencyMask class="form-control" formControlName="preco"/>
-    </div>
+      <div class="form-group">
+        <label for="preco">Preço</label>
+        <input name="preco" id="preco" type="text" currencyMask class="form-control" formControlName="preco"/>
+      </div>
 
-    <div style="color: red; font-size: 10px;" *ngIf="form.controls['preco'].errors?.required">Preço é obrigatório.</div>
-    <br>
+      <div style="color: red; font-size: 10px;" *ngIf="form.controls['preco'].errors?.required">Preço é obrigatório.</div>
+      <br>
 
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Salvar</button>
-  </form>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+</div>

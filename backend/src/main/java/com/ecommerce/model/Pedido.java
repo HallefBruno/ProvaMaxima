@@ -39,10 +39,5 @@ public class Pedido implements Serializable {
     
     @OneToMany(mappedBy="id.pedido")
     private Set<ItemPedido> itens;
-    
-//    @NotNull(message="Campo obrigatório!")
-//    @Column(name="valor_total")
-//    private BigDecimal valorTortal;
 
-    
 }

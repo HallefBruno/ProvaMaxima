@@ -1,12 +1,14 @@
-<div class="jumbotron">
-    <form [formGroup]="form">
+<div [hidden]="salvando" style="color: slategray;">Aguarde...</div>
+<div [hidden]="submitted" class="jumbotron">
+    <form #petsForm="ngForm" (ngSubmit)="onSubmit(petsForm)" [formGroup]="form">
         <div class="p-grid p-fluid">
             <div style="height: 250px;" class="card">
                 <h5 class="card-header">Novo pedido</h5>
                 <div class="card-body">
                     <div class="p-col-12 p-md-12">
-                        <p-autoComplete [minLength]="2" [(ngModel)]="cliente" formControlName="nomeCliente"
-                            [suggestions]="results" field="nome" (completeMethod)="searchCliente($event)">
+                        <label for="cliente">Cliente</label>
+                        <p-autoComplete inputId="cliente" [minLength]="2" [(ngModel)]="cliente" formControlName="nomeCliente"
+                            [suggestions]="clientes" field="nome" (completeMethod)="searchCliente($event)">
                             <ng-template let-value pTemplate="selectedItem">
                                 <span style="font-size:18px">>{{value.nome}}</span>
                             </ng-template>
@@ -24,8 +26,9 @@
                 <h5 class="card-header">Carrinho</h5>
                 <div class="card-body">
                     <div class="p-col-12 p-md-12">
-                        <p-autoComplete [minLength]="2" [(ngModel)]="produto" formControlName="nomeProduto"
-                            [suggestions]="results" field="nome" (onSelect)="onSelect($event)"
+                        <label for="produto">Produto</label>
+                        <p-autoComplete inputId="produto" [minLength]="2" [(ngModel)]="produto" formControlName="nomeProduto"
+                            [suggestions]="produtos" field="nome" (onSelect)="onSelect($event)"
                             (completeMethod)="searchProduto($event)">
                             <ng-template let-value pTemplate="selectedItem">
                                 <span style="font-size:18px">>{{value.nome}}</span>
@@ -59,28 +62,29 @@
         <br>
         <div class="table-responsive">
             <table class="table">
-                <tr *ngFor="let itens of listProdutos let i = index">
+                <tr *ngFor="let produto of listProdutos let i = index">
                     <td style="background-color: white;">
                         <div class="row">
                             <div class="col-sm-2">
                                 <div style="width: 6rem;">
-                                    <img class="card-img-top rounded-circle" [src]="itens.imagemUrl" alt="Card image cap">
+                                    <img class="card-img-top rounded-circle" [src]="produto.imagemUrl" alt="Card image cap">
                                 </div>
                             </div>
                             <div style="margin-top: 50px;" class="col-sm-6">
-                                <p class="card-text">{{itens.nome}}</p>
+                                <p class="card-text">{{produto.nome}}</p>
                             </div>
 
                             <div style="margin-top: 45px;" class="col-sm-3">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <input (keyup)="onKey(itens)" min="1" style="width: 65px;" type="number" formControlName="quantidade" class="form-control" id="quantidade" name="quantidade">
+                                        <input (focusout)="focusout(produto)" formControlName="quantidade" [(ngModel)]="produto.id" min="1" style="width: 65px;" type="number" class="form-control" id="{{produto.id}}-quantidade">
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <p>{{itens.precoUnitario | currency : 'R$'}}</p>
-                                                <p style="font-weight: bold;">{{itens.precoUnitario | currency : 'R$'}}</p>
+                                                <p>{{produto.precoUnitario | currency : 'R$'}}</p>
+                                                <p style="font-weight: bold;">{{precoAtual | currency : 'R$'}}</p>
+                                                <input disabled style="width: 100px; border: 0" class="form-control" id="{{produto.id}}-precoAtual">
                                             </div>
                                         </div>
                                     </div>
@@ -141,12 +145,10 @@
                         <div class="col-lg-3">
                             <div class="row">
                                 <div style="margin-bottom: 2%;" class="col-sm-12">
-                                    <button type="button" style="width: 230px;" class="btn btn-success">Finalizar
-                                        pedido</button>
+                                    <button type="submit" [disabled]="form.invalid" style="width: 230px;" class="btn btn-success">Finalizar pedido</button>
                                 </div>
                                 <div class="col-sm-12">
-                                    <button type="button" style="width: 230px;" class="btn btn-light">Limpar
-                                        carrinho</button>
+                                    <button type="button" style="width: 230px;" class="btn btn-light">Limpar carrinho</button>
                                 </div>
                             </div>
                         </div>

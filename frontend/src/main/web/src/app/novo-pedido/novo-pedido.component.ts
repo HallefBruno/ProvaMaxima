@@ -13,50 +13,86 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NovoPedidoComponent implements OnInit {
 
-	@ViewChild('boxinputPrecoUnitario') inputPrecoUnitario: ElementRef;
-
+	ele:ElementRef
 	form: FormGroup;
 	submitted = false;
 	salvando = true;
 	isLoadingResult: boolean;
-	results: string[];
+	clientes: any[];
+	produtos:any[];
+	itensPedido:any[]=[];
 	urlImage: string;
 	listProdutos: any[] = [];
-	precoAtual:string="";
+	precoAtual:number;
 
-	constructor(private fb: FormBuilder, private router: Router, private novoPedidoService: NovoPedidoService) { }
+	constructor(private fb: FormBuilder, private router: Router, private novoPedidoService: NovoPedidoService) { 
+		;
+	}
 
 	ngOnInit(): void {
 
 		this.form = this.fb.group({
-			nomeCliente: [undefined, Validators.required],
-			nomeProduto: [undefined, Validators.required],
-			quantidade: [undefined, Validators.required]
+			nomeCliente: ['', Validators.required],
+			nomeProduto: ['', Validators.required],
+			quantidade: ['', Validators.required]
 		});
 
 	}
 
-	searchCliente(event: any) {
-		this.novoPedidoService.getClientes(event.query).subscribe(data => {
-			this.results = data;
+	searchCliente(cliente: any) {
+		this.novoPedidoService.getClientes(cliente.query).subscribe(data => {
+			this.clientes = data;
 		});
 	}
 
-	onSelect(event: any) {
-		console.log(event);
-		this.listProdutos.push(event);
-	}
-
-	searchProduto(event: any) {
-		this.novoPedidoService.getProdutos(event.query).subscribe(data => {
-			//this.form.get('quantidade').setValue("");
-			this.results = data;
+	searchProduto(produto: any) {
+		this.novoPedidoService.getProdutos(produto.query).subscribe(data => {
+			this.produtos = data;
 		});
 	}
 
-	onKey(event: any) {
-		console.log(event);
-		console.log(this.form.get('quantidade').value);
+	onSelect(produto: any) {
+		if(this.containsObject(produto,this.listProdutos)) {
+			this.listProdutos.push(produto);
+		}
+	}
+
+	focusout(produto: any) {
+		let quantidade = this.form.get('quantidade').value;
+		let valor = produto.precoUnitario * quantidade;
+		document.getElementById(produto.id+"-precoAtual").setAttribute('value',"R$ "+valor.toString());
+		this.itensPedido.push({'idProduto':produto.id,'quantidade':quantidade});
+		console.log(this.itensPedido);
+		
+	}
+
+	containsObject(obj:any, list:any) {
+		if(list.length == 0) {
+			return true;
+		}
+		for (let i = 0; i < list.length; i++) {
+			if (list[i].nome === obj.nome) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	onSubmit(petsForm:any) {
+		console.log(petsForm);
+		this.submitted = true;
+        this.salvando = false;
+        if (this.form.valid) {
+			let pedido = {
+				cliente: {
+					'id':this.clientes[0].id
+				}
+			};
+
+			console.log(this.clientes[0].id);
+		}
+		this.submitted = false;
+        this.salvando = true;
 	}
 
 

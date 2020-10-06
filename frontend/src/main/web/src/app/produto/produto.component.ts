@@ -25,9 +25,6 @@ export class ProdutoComponent implements OnInit {
 	}
 	
 	onSubmit() {
-
-		console.log(this.form.get('preco').value);
-
         this.submitted = true;
         this.salvando = false;
         if (this.form.valid) {

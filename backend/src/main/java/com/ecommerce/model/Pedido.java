@@ -36,13 +36,13 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "id_cliente")
     @ManyToOne
     private Cliente cliente;
-
-    @OneToMany(mappedBy="id.produto")
+    
+    @OneToMany(mappedBy="id.pedido")
     private Set<ItemPedido> itens;
     
-    @NotNull(message="Campo obrigatório!")
-    @Column(name="valor_total")
-    private BigDecimal valorTortal;
+//    @NotNull(message="Campo obrigatório!")
+//    @Column(name="valor_total")
+//    private BigDecimal valorTortal;
 
     
 }

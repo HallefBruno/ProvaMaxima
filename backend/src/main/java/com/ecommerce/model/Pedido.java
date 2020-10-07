@@ -29,9 +29,9 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column
-    @NotNull(message = "Campo obrigatório!")
-    private Integer quantidade;
+//    @Column
+//    @NotNull(message = "Campo obrigatório!")
+//    private Integer quantidade;
     
     @JoinColumn(name = "id_cliente")
     @ManyToOne

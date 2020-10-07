@@ -11,8 +11,9 @@ export class NovoPedidoService {
 
     constructor(private http: HttpClient) { }
 
-    salvar(produto: Object): Observable<Object> {
-        return this.http.post(`${this.baseUrl}/salvar`, produto);
+    salvar(pedido: any): Observable<any> {
+        let params = new HttpParams().set('pedido', pedido);
+        return this.http.post(`${this.baseUrl}/salvar`, {params});
 	}
 	
 	getClientes(nome: string): Observable<any> {

@@ -77,9 +77,10 @@
                             <div style="margin-top: 45px;" class="col-sm-3">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <input (focusout)="focusout(produto)" formControlName="quantidade" [(ngModel)]="produto.id" min="1" style="width: 65px;" type="number" class="form-control" id="{{produto.id}}-quantidade">
+                                        <input formControlName="quantidade"  min="1" style="width: 65px;" type="number" class="form-control" name="{{produto.id}}-quantidade">
+                                        <!--<input (focusout)="focusout(produto)" formControlName="quantidade" (ngModelChange)="getQuantidade($event)" min="1" style="width: 65px;" type="number" class="form-control" id="{{produto.id}}-quantidade">-->
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <p>{{produto.precoUnitario | currency : 'R$'}}</p>
@@ -88,8 +89,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <a title="remover item"><img src="assets/icones/icone-apagar.png"></a>
+                                    <div class="col-sm-3">
+                                        <!--<a hidden title="remover item"><img src="assets/icones/icone-apagar.png"></a>-->
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary" style="font-size: 10px;" (click)="incluir(produto)">Incluir</button>
+                                            <button type="button" class="btn btn-danger" style="font-size: 10px;" (click)="remove(produto)">Remover</button>
+                                        </div>
                                     </div>
 
                                 </div>
